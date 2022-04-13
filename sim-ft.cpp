@@ -4,6 +4,7 @@
 #include <cmath>
 
 Vft ft;
+#define SIZE 500
 
 void tick() {
     ft.clk = 1;
@@ -17,7 +18,7 @@ void print_out() {
     int64_t sin = ft.sin_sum; //((int64_t) ft.sin_sum << 10) >> 10;
     double dcos = cos;
     double dsin = sin;
-    double offset = -atan2(dsin, dcos) + (ft.offset * 2 * M_PI / 400.0);
+    double offset = -atan2(dsin, dcos) + (ft.offset * 2 * M_PI / SIZE);
     if(offset < 0) offset += 2 * M_PI;
     printf("%lld [0x%llx] - %lld [0x%llx] - offset %u [%.10g]\n", cos, cos, sin, sin, ft.offset, offset);
 }
@@ -28,8 +29,8 @@ int main() {
     ft.rst = 0;
     int latency = 3;
     
-    for(unsigned i = 0; i < 404; i++) {
-        ft.data = round((1<<10) * cos(2 * M_PI * i / 400 + 0.5));
+    for(unsigned i = 0; i < SIZE+latency; i++) {
+        ft.data = round((1<<10) * cos(2 * M_PI * i / SIZE + 0.5));
         tick();
     }
     
@@ -41,8 +42,8 @@ int main() {
 
     print_out();
 
-    for(unsigned i = 0; i < 404; i++) {
-        ft.data = round((1<<10) * cos(2 * M_PI * i / 400 + 0.3));
+    for(unsigned i = 0; i < SIZE+latency; i++) {
+        ft.data = round((1<<10) * cos(2 * M_PI * i / SIZE + 0.3));
         tick();
     }
 
@@ -57,8 +58,8 @@ int main() {
         tick();
     }
 
-    for(unsigned i = 0; i < 404; i++) {
-        ft.data = round((1<<10) * cos(2 * M_PI * i / 400 + 2.3));
+    for(unsigned i = 0; i < SIZE+latency; i++) {
+        ft.data = round((1<<10) * cos(2 * M_PI * i / SIZE + 2.3));
         tick();
     }
 
@@ -70,7 +71,7 @@ int main() {
 
     print_out();
 
-    for(unsigned i = 0; i < 403; i++) {
+    for(unsigned i = 0; i < SIZE+latency; i++) {
         tick();
     }
 
