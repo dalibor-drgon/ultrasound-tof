@@ -56,8 +56,8 @@ int main() {
     test(-2, 1);
     test(-2, -1);
 
-    if(1)
-    return 0;
+    //if(1)
+    //return 0;
 
     test(1, 2);
     test(1, -2);
@@ -74,8 +74,8 @@ int main() {
     test(-2, 7);
     test(-2, -7);
 
-    if(0)
-    for(unsigned i = 0; i < 100*4000; i++) {
+    if(1)
+    for(unsigned i = 0; i < 10*4000; i++) {
         int y = (rand() << 2) + (rand() & 3);
         int x = (rand() << 2) + (rand() & 3);
         test(y, x);
