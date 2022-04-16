@@ -1,21 +1,8 @@
 
-module clzi
-    #(parameter n=2)();
-
-    function [n:0] clzi(input [2*n-1:0] in);
-        if (in[n-1+n] == 0) begin 
-            return { (in[n-1+n] & in[n-1]), 1'b0, in[(2*n-2):n] };
-        end else begin 
-            return { (in[n-1+n] & in[n-1]), !in[n-1], in[(n-2):0] };
-        end
-    endfunction
-
-endmodule
-
 module clz64
 (
     input [63:0] x,
-    output [5:0] y
+    output [6:0] y
 );
 
 
@@ -50,6 +37,6 @@ module clz64
         assign d[i*6+5:i*6] = clzi16.clzi(c[i*10+9:i*10]);
 
     wire [6:0] res = clzi32.clzi(d[11:0]);
-    assign y = res[5:0];
+    assign y = res[6:0];
 
 endmodule
