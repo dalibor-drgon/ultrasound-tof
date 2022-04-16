@@ -1,6 +1,6 @@
 module delayer
 #(
-    parameter CYCLES = 1;
+    parameter CYCLES = 1,
     parameter WIDTH = 1
 )
 (
@@ -13,7 +13,7 @@ module delayer
     
     always @(posedge clk) begin 
         delay_reg[0] <= in;
-        for(genvar i = 1; i < CYCLES; i++) begin 
+        for(integer i = 1; i < CYCLES; i++) begin 
             delay_reg[i] <= delay_reg[i-1];
         end
     end
